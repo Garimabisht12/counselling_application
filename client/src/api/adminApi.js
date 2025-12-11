@@ -1,8 +1,8 @@
 import axios from 'axios';
 import { useAdminAuth } from '@/context/AdminAuth';
-
+const base_url = process.env.app_server_url || 'http://localhost:5000/api/v1';
 const adminApi = axios.create({
-  baseURL: 'http://localhost:5000/api/v1/admin',
+  baseURL: `${base_url}/admin`,
 });
 
 export const useAdminApi = () => {

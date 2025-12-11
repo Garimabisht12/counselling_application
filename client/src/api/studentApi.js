@@ -4,8 +4,9 @@ import { useStudentAuth } from '@/context/StudentAuth';
 /* --------------------------------------------------
    One shared Axios instance for all student calls
    -------------------------------------------------- */
+const base_url = process.env.app_server_url || 'http://localhost:5000/api/v1';
 const stuApi = axios.create({
-  baseURL: 'http://localhost:5000/api/v1',   // adjust if backend URL differs
+  baseURL: base_url,   // adjust if backend URL differs
 });
 
 /* --------------------------------------------------
