@@ -4,7 +4,9 @@ import { useStudentAuth } from '@/context/StudentAuth';
 /* --------------------------------------------------
    One shared Axios instance for all student calls
    -------------------------------------------------- */
-const base_url = process.env.app_server_url || 'http://localhost:5000/api/v1';
+const dotenv = require('dotenv');
+const base_url = process.env.REACT_APP_BASE_URL || "http://localhost:5000/api/v1";
+dotenv.config();
 const stuApi = axios.create({
   baseURL: base_url,   // adjust if backend URL differs
 });

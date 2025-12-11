@@ -1,6 +1,6 @@
 // src/pages/AdminView.jsx
 import { useEffect, useState, useRef } from 'react';
-import { useAdminApi } from '@/api/adminApi';
+import  { useAdminApi } from '@/api/adminApi';
 import { useAdminAuth } from '@/context/AdminAuth';
 import Navbar from '@/components/Navbar/Navbar';
 
