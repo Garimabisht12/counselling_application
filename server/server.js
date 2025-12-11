@@ -16,6 +16,10 @@ app.use(express.json()); // allows JSON in body
 // plugging routes into server.js
 const authRoutes = require('./src/routes/auth.js');
 
+app.get('/', (req, res) => {
+  res.send('Welcome to the Counselling App API');
+}
+
 /* … after app.use(express.json()) … */
 app.use('/api/v1/auth', authRoutes);
 
