@@ -1,118 +1,144 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useStudentAuth } from '@/context/StudentAuth';
+import { useStudentAuth } from "@/context/StudentAuth";
 import axios from "axios";
+import { ArrowLeft, Eye, EyeOff } from "lucide-react";
+
 export default function SignUp() {
+  const [showPass, setShowPass] = useState(false);
+  const [showCPass, setShowCPass] = useState(false);
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
+
   const [err, setErr] = useState("");
-
   const navigate = useNavigate();
-const { login } = useStudentAuth();   // ← now you have login()
-
+  const { login } = useStudentAuth();
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  //  check whether password matches or not:
+    e.preventDefault();
 
-  if (formData.password !== formData.confirmPassword) {
-      return setErr('Passwords do not match');
-    
+    if (formData.password !== formData.confirmPassword) {
+      return setErr("Passwords do not match");
     }
 
+    try {
+      const { data } = await axios.post(
+        "http://localhost:5000/api/v1/auth/register",
+        formData
+      );
 
-  try {
-    const { data } = await axios.post(
-      'http://localhost:5000/api/v1/auth/register',
-      formData
-    );
-
-    login(data.token, data.student);          // ✅ saves token + student
-    navigate('/admissionform', { replace: true });
-  } catch (err) {
-    console.log(err)
-    setErr(err.response?.data?.message || 'Sign‑up failed');
-  }
-};
-
+      login(data.token, data.student);
+      navigate("/admissionform", { replace: true });
+    } catch (error) {
+      setErr(error.response?.data?.message || "Sign-up failed");
+    }
+  };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f2f2f2] font-sans px-4">
-      <div className="bg-white p-6 rounded-lg shadow-md w-full max-w-sm">
-        <form onSubmit={handleSubmit} className="flex flex-col">
-          <h2 className="text-center text-xl font-semibold mb-5">Sign Up</h2>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4 relative">
 
-          <label htmlFor="name" className="mb-1 text-sm">
-            Name:
-          </label>
+      {/* Back Button */}
+      <button
+        onClick={() => navigate(-1)}
+        className="absolute top-4 left-4 flex items-center gap-1 text-gray-700 hover:text-black"
+      >
+        <ArrowLeft size={18} /> Back
+      </button>
+
+      <div className="bg-white p-6 rounded-2xl shadow-lg w-full max-w-sm">
+        <form onSubmit={handleSubmit} className="flex flex-col">
+          <h2 className="text-center text-2xl font-bold mb-5">Create Account</h2>
+
+          {/* NAME */}
+          <label className="text-sm mb-1">Full Name:</label>
           <input
             type="text"
-            id="name"
             name="name"
             placeholder="Enter your full name"
             value={formData.name}
             onChange={handleChange}
             required
-            className="border border-gray-300 rounded px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="border border-gray-300 rounded-lg px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 
-          <label htmlFor="email" className="mb-1 text-sm">
-            Email:
-          </label>
+          {/* EMAIL */}
+          <label className="text-sm mb-1">Email:</label>
           <input
             type="email"
-            id="email"
             name="email"
             placeholder="Enter your email"
             value={formData.email}
             onChange={handleChange}
             required
-            className="border border-gray-300 rounded px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="border border-gray-300 rounded-lg px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
 
-          <label htmlFor="password" className="mb-1 text-sm">
-            Password:
-          </label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Enter your password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-            className="border border-gray-300 rounded px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
+          {/* PASSWORD */}
+          <label className="text-sm mb-1">Password:</label>
+          <div className="relative">
+            <input
+              type={showPass ? "text" : "password"}
+              name="password"
+              placeholder="Enter your password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              className="border border-gray-300 rounded-lg px-3 py-2 w-full pr-10 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              type="button"
+              onClick={() => setShowPass(!showPass)}
+              className="absolute right-3 top-2.5 text-gray-600"
+            >
+              {showPass ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
+          </div>
 
-          <label htmlFor="confirmPassword" className="mb-1 text-sm">
-            Confirm Password:
-          </label>
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            placeholder="Confirm your password"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            required
-            className="border border-gray-300 rounded px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-blue-400"
-          />
-          
+          {/* CONFIRM PASSWORD */}
+          <label className="text-sm mb-1">Confirm Password:</label>
+          <div className="relative">
+            <input
+              type={showCPass ? "text" : "password"}
+              name="confirmPassword"
+              placeholder="Confirm your password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              required
+              className="border border-gray-300 rounded-lg px-3 py-2 w-full pr-10 mb-3 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+            <button
+              type="button"
+              onClick={() => setShowCPass(!showCPass)}
+              className="absolute right-3 top-2.5 text-gray-600"
+            >
+              {showCPass ? <EyeOff size={20} /> : <Eye size={20} />}
+            </button>
+          </div>
 
+          {/* ERROR */}
+          {err && (
+            <p className="text-red-600 text-center text-sm font-medium mb-2">
+              {err}
+            </p>
+          )}
+
+          {/* SUBMIT */}
           <button
             type="submit"
-            className="bg-blue-600 text-white rounded py-2 mt-2 hover:bg-blue-700 transition"
+            className="bg-blue-600 text-white rounded-lg py-2 mt-2 hover:bg-blue-700 transition font-semibold"
           >
             Sign Up
           </button>
-           {err && <p className="text-red-600">{err}</p>}
+
+          {/* LINK */}
           <div className="text-sm mt-4 text-center">
             <Link to="/signIn" className="text-blue-600 hover:underline">
               Already have an account? Sign In

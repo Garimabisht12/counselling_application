@@ -5,7 +5,8 @@ const {
   getMe,
   updateMarks,
   savePreferences,
-  makeDecision
+  makeDecision,
+  getBranches
 } = require('../controllers/studentController');
 const { protectStudent } = require('../middleware/auth');
 
@@ -13,5 +14,6 @@ router.get('/me',          protectStudent, getMe);
 router.put('/marks',       protectStudent, updateMarks);
 router.put('/preferences', protectStudent, savePreferences);
 router.put('/decision', protectStudent, makeDecision);
+router.get('/branches', getBranches);
 
 module.exports = router;

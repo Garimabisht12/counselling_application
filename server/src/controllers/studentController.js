@@ -1,13 +1,31 @@
 // server/src/controllers/studentController.js
 const mongoose = require('mongoose');
 const Student  = require('../models/Student');
-
+const Branch   = require('../models/Branch');
 /*--------------------------------------------------
   GET /student/me   (protected)
 --------------------------------------------------*/
 exports.getMe = (req, res) => {
   res.json({ success: true, student: req.user });
 };
+
+
+
+
+exports.getBranches = async (req, res) => {
+  try {
+    const branches = await Branch.find();
+    res.json(branches);
+  } catch (err) {
+    console.error('getBranches error:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+
+
+
+
 
 /*--------------------------------------------------
   PUT /student/marks   (protected)
@@ -72,6 +90,8 @@ exports.savePreferences = async (req, res) => {
     res.status(500).json({ success: false, message: 'Server error' });
   }
 };
+
+
 
 // PUT /student/decision   { decision:"Accepted" | "Rejected" }
 exports.makeDecision = async (req, res) => {
