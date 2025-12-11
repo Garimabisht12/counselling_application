@@ -1,0 +1,26 @@
+# Client
+client/node_modules/
+client/.env
+client/.DS_Store
+client/build/
+client/dist/
+
+# Server
+server/node_modules/
+server/.env
+server/.DS_Store
+
+# Logs
+*.log
+logs/
+
+# System
+.DS_Store
+
+# IDEs/editors
+.vscode/
+*.swp
+
+# Optional env variants
+.env
+
