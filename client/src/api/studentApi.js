@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { useStudentAuth } from '@/context/StudentAuth';
 
-const base_url = import.meta.env.VITE_SOME_KEY ||'http://localhost:5000';
+const base_url = import.meta.env.VITE_BASE_URL ||'http://localhost:5000';
 /* --------------------------------------------------
    One shared Axios instance for all student calls
    -------------------------------------------------- */
