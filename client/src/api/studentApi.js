@@ -8,7 +8,7 @@ const dotenv = require('dotenv');
 const base_url = process.env.REACT_APP_BASE_URL || "http://localhost:5000/api/v1";
 dotenv.config();
 const stuApi = axios.create({
-  baseURL: base_url,   // adjust if backend URL differs
+  baseURL: `${base_url}/api.v1`,   // adjust if backend URL differs
 });
 
 /* --------------------------------------------------

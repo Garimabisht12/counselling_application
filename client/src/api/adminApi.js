@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 const base_url = process.env.REACT_APP_BASE_URL || "http://localhost:5000/api/v1";
 dotenv.config();
 const adminApi = axios.create({
-  baseURL: `${base_url}/admin`,
+  baseURL: `${base_url}/api/v1/admin`,
   headers: {
     "Content-Type": "application/json",
   },
