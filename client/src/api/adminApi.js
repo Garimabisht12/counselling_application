@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { useAdminAuth } from '@/context/AdminAuth';
-const base_url = import.meta.env.VITE_SOME_KEY
+const base_url = import.meta.env.VITE_SOME_KEY || 'http://localhost:5000';
 const adminApi = axios.create({
   baseURL: `${base_url}/api/v1/api/v1/admin`,
 });
