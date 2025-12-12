@@ -18,9 +18,7 @@ export default function AdminLogin() {
       const { data } = await axios.post(
         '/admin/login',
         { email, password },
-        {headers: {
-    'Content-Type': 'application/json'
-  }}
+        
       );
       login(data.token, { email });
       navigate('/admin');
