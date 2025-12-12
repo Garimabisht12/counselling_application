@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useStudentAuth } from "@/context/StudentAuth";
-import axios from "axios";
+import axios from "../../api/studentApi";
 import { ArrowLeft, Eye, EyeOff } from "lucide-react";
 
 export default function SignIn() {
@@ -20,7 +20,7 @@ export default function SignIn() {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/v1/auth/login",
+        "/auth/login",
         formData
       );
 

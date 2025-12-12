@@ -11,6 +11,7 @@ export const useAdminApi = () => {
   // attach token on every request
   adminApi.interceptors.request.use((config) => {
     if (token) config.headers.Authorization = `Bearer ${token}`;
+    console.log(base_url)
     return config;
   });
 

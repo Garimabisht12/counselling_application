@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import axios from '../../api/adminApi';
 import { useNavigate } from 'react-router-dom';
 import { useAdminAuth } from '@/context/AdminAuth';
 import { Eye, EyeOff, ArrowLeft } from 'lucide-react';
@@ -16,7 +16,7 @@ export default function AdminLogin() {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        'http://localhost:5000/api/v1/admin/login',
+        '/admin/login',
         { email, password }
       );
       login(data.token, { email });
