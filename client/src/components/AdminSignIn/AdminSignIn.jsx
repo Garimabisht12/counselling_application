@@ -22,7 +22,7 @@ export default function AdminLogin() {
       login(data.token, { email });
       navigate('/admin');
     } catch (error) {
-      setErr(error.response?.data?.message || 'Login failed');
+      setErr(error.response?.data?.message || `Login failed ${import.meta.env.VITE_BASE_URL} `);
     }
   };
 
