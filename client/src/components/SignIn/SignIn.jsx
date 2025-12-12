@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useStudentAuth } from "@/context/StudentAuth";
-import axios from "../../api/studentApi";
+import axios from '@/api/axios';
 import { ArrowLeft, Eye, EyeOff } from "lucide-react";
 
 export default function SignIn() {
