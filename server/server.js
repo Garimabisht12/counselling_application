@@ -11,17 +11,14 @@ const PORT = process.env.PORT || 5000;
 const CLIENT = process.env.CLIENT_URL || 'localhost:5173'
 
 
+
+
 app.use(
   cors({
     origin: "https://counsellingappclg.netlify.app",
     credentials: true,
   })
 );
-
-
-app.options("*", cors());
-
-
 app.use((req, res, next) => {
       res.setHeader('Access-Control-Allow-Origin', 'https://counsellingappclg.netlify.app');
       res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS'); // Include all methods your API uses
@@ -29,6 +26,11 @@ app.use((req, res, next) => {
       next();
     });
     
+
+app.options("*", cors());
+
+
+
 
 app.use(express.json());
 
