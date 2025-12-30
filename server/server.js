@@ -10,8 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const CLIENT = process.env.CLIENT_URL || 'localhost:5173'
 app.use(cors({
-  origin: CLIENT,
-  credentials: true
+  origin: '*'
 }));
 
 app.use(express.json()); // allows JSON in body
