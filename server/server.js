@@ -19,10 +19,10 @@ app.use(
 );
 
 
-app.options("*", cors());
+// app.options("*", cors());
 
 
-app.use(express.json()); // allows JSON in body
+app.use(express.json());
 
 
 // plugging routes into server.js
