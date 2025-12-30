@@ -12,7 +12,7 @@ const CLIENT = process.env.CLIENT_URL || 'localhost:5173'
 
 
 
-
+console.log('popo')
 app.use(
   cors({
     origin: "https://counsellingappclg.netlify.app",

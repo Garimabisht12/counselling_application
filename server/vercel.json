@@ -7,10 +7,10 @@
 
     "routes": [
     { "src": "/api/(.*)", "dest": "server.js" },
-    { "src": "/(.*)", "dest": "/server.js" }] ,
+    { "src": "/(.*)", "dest": "server.js" }] ,
      "headers": [
     {
-      "source": "/src/(.*)",
+      "source": "/(.*)",
       "headers": [
         { "key": "Access-Control-Allow-Credentials", "value": "true" },
         { "key": "Access-Control-Allow-Origin", "value": "*" },
