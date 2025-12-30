@@ -9,9 +9,20 @@ connectDB();
 const app = express();
 const PORT = process.env.PORT || 5000;
 const CLIENT = process.env.CLIENT_URL || 'localhost:5173'
-app.use(cors({
-  origin: '*'
-}));
+
+
+app.use(
+  cors({
+    origin: "https://counsellingappclg.netlify.app",
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
+
+app.options("*", cors());
+
 
 app.use(express.json()); // allows JSON in body
 
