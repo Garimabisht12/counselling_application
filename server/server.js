@@ -22,6 +22,14 @@ app.use(
 app.options("*", cors());
 
 
+app.use((req, res, next) => {
+      res.setHeader('Access-Control-Allow-Origin', 'https://counsellingappclg.netlify.app');
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS'); // Include all methods your API uses
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Include all headers your API expects
+      next();
+    });
+    
+
 app.use(express.json());
 
 
