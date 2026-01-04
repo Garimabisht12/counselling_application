@@ -34,8 +34,9 @@ export default function SignUp() {
         "/auth/register",
         formData
       );
-
+      console.log('yeah')
       login(data.token, data.student);
+      console.log('no?')
       navigate("/admissionform", { replace: true });
     } catch (error) {
       setErr(error.response?.data?.message || "Sign-up failed");
