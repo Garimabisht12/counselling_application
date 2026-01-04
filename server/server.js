@@ -11,7 +11,7 @@ const PORT = process.env.PORT || 5000;
 const CLIENT = process.env.CLIENT_URL || 'localhost:5173'
 
 app.use(cors({
-    origin: [CLIENT, 'http://localhost:5173', 'http://localhost:5174'],
+    origin: ['https://counsellingappclg.netlify.app',CLIENT, 'http://localhost:5173', 'http://localhost:5174'],
     credentials: true
 }))
 
