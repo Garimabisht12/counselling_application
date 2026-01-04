@@ -10,27 +10,10 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 const CLIENT = process.env.CLIENT_URL || 'localhost:5173'
 
-
-
-console.log('popo')
-app.use(
-  cors({
-    origin: "https://counsellingappclg.netlify.app",
-    credentials: true,
-  })
-);
-app.use((req, res, next) => {
-      res.setHeader('Access-Control-Allow-Origin', 'https://counsellingappclg.netlify.app');
-      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS'); // Include all methods your API uses
-      res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization'); // Include all headers your API expects
-      next();
-    });
-    
-
-app.options("*", cors());
-
-
-
+app.use(cors({
+    origin: [CLIENT, 'http://localhost:5173', 'http://localhost:5174'],
+    credentials: true
+}))
 
 app.use(express.json());
 
