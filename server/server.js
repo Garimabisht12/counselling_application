@@ -8,14 +8,9 @@ dotenv.config();
 connectDB();
 const app = express();
 const PORT = process.env.PORT || 5000;
-const CLIENT = process.env.CLIENT_URL || 'localhost:5173'
 
-app.use(cors({
-    origin: ['https://counsellingappclg.netlify.app',CLIENT, 'http://localhost:5173', 'http://localhost:5174'],
-    credentials: true
-}))
-
-app.use(express.json());
+app.use(cors({ origin: ['http://localhost:5173', 'http://localhost:5174'], credentials: true }));
+app.use(express.json()); // allows JSON in body
 
 
 // plugging routes into server.js
@@ -51,4 +46,3 @@ app.listen(PORT, () => {
   console.log(`🚀 Server is running at http://localhost:${PORT}`);
 });
 
-export default app;

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useStudentAuth } from "@/context/StudentAuth";
-import axios from "axios";
+import axios from "../../api/axios";
 import { ArrowLeft, Eye, EyeOff } from "lucide-react";
 
 export default function SignUp() {
@@ -31,11 +31,12 @@ export default function SignUp() {
 
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/v1/auth/register",
+        "/auth/register",
         formData
       );
-
+      console.log('yeah')
       login(data.token, data.student);
+      console.log('no?')
       navigate("/admissionform", { replace: true });
     } catch (error) {
       setErr(error.response?.data?.message || "Sign-up failed");

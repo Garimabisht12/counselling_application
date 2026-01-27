@@ -38,10 +38,14 @@ export default function AdmissionForm() {
   const submit = async (e) => {
     e.preventDefault();
 
-    await api.put('/student/marks', marks);
-    await api.put('/student/preferences', { preferences: prefs });
-
-    nav('/dashboard');
+    try {
+      await api.put('/student/marks', marks);
+      await api.put('/student/preferences', { preferences: prefs });
+      nav('/dashboard');
+    } catch (err) {
+      console.error('Submit failed:', err);
+      alert('Failed to submit form. Please try again.');
+    }
   };
 
   return (

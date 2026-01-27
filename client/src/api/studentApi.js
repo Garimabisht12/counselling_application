@@ -1,10 +1,13 @@
-import axios from './axios';
+import axios from 'axios';
 import { useStudentAuth } from '@/context/StudentAuth';
 
-
+const base_url = import.meta.env.VITE_BASE_URL ||'http://localhost:5000';
 /* --------------------------------------------------
    One shared Axios instance for all student calls
    -------------------------------------------------- */
+const stuApi = axios.create({
+  baseURL:  `${base_url}/api/v1`,   // adjust if backend URL differs
+});
 
 /* --------------------------------------------------
    React hook that injects the JWT on every request

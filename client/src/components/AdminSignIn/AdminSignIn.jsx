@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from '@/api/axios';
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useAdminAuth } from '@/context/AdminAuth';
 import { Eye, EyeOff, ArrowLeft } from 'lucide-react';
@@ -16,14 +16,13 @@ export default function AdminLogin() {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        '/admin/login',
-        { email, password },
-        
+        'http://localhost:5000/api/v1/admin/login',
+        { email, password }
       );
       login(data.token, { email });
       navigate('/admin');
     } catch (error) {
-      setErr(error.response?.data?.message || `Login failed  `);
+      setErr(error.response?.data?.message || 'Login failed');
     }
   };
 
